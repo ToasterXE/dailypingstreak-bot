@@ -1,4 +1,4 @@
-import discord, datetime
+import discord, datetime, random
 from settings import startdate, prefix, last_date
 
 async def send_message(message, user_nachricht):
@@ -41,7 +41,7 @@ def run_discord_bot():
         user_message = str(message.content)
         channel = str(message.channel)
 
-        # print(f"{username} said: '{user_message}' ({channel})")
+        print(f"{username} said: '{user_message}' ({channel})")
 
         if user_message[0] == prefix:
             user_message = user_message[1:].strip()  # [1:] Removes the '?'
@@ -70,12 +70,20 @@ def run_discord_bot():
                         datei.write(daten[i] + "\n")
                     datei.close 
 
+        elif "<:komischesetwas:949028421781028864>" in user_message:
+            if random.randint(1,5) == 1:
+                await send_message(message, user_message)
+
+
     client.run(TOKEN)
 
 
 def react(nachricht_e):
     global prefix
     nachricht = nachricht_e.lower()
+
+    if nachricht == "<:komischesetwas:949028421781028864>":
+            return "<:komischesetwas:949028421781028864>"
 
     if "prefix" in nachricht:
         prefix = nachricht[-1]
