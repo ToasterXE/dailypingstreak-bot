@@ -1,4 +1,5 @@
 import discord, datetime, random
+from jungEdigganervmichnichtduscheisskek import token_e
 from settings import startdate, prefix, last_date
 
 async def send_message(message, user_nachricht):
@@ -24,7 +25,7 @@ with open("settings.py") as datei:
 
 def run_discord_bot():
     global last_date, e, startdate
-    TOKEN = 'MTA4Njk1OTM2NTkxNjk5NTU5NA.G8Fc2i.W1Q8r_quwZWbV9BwLxovoS1wISWd6EhMVO2AF4'
+    TOKEN = token_e
     client = discord.Client(intents=intents)
 
     @client.event
