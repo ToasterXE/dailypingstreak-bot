@@ -1,6 +1,7 @@
 import discord, datetime, random
 from jungEdigganervmichnichtduscheisskek import token_e
 from settings import startdate, prefix, last_date, server
+from discord.utils import get
 
 async def send_message(message, user_nachricht, author = None):
     try:
@@ -27,7 +28,7 @@ with open("settings.py") as datei:
         daten.append(line.strip())
     datei.close()
 
-
+franzosen = [398907038798970891,568390435177758741, 419198918023184385, 500720535315939328]
 
 def run_discord_bot():
     global last_date, e, startdate
@@ -67,8 +68,6 @@ def run_discord_bot():
                 await send_message(message, user_message, author)
             
 
-
-
             elif "<@&869885593977520128>" in user_message:
                 last_date = e[0]
                 if (datetime.date.today() - last_date).days <= 1:
@@ -96,7 +95,26 @@ def run_discord_bot():
                 if random.randint(1,5) == 1:
                     await send_message(message, user_message)
 
-
+        if "franzosenjail" in user_message and message.channel == client.get_channel(807273390385266711):
+            if ".t" in user_message:
+                for user in franzosen:
+                    franzose = message.guild.get_member(user)
+                    await franzose.remove_roles(get(franzose.guild.roles, name="zugriff"))
+                    await franzose.add_roles(get(franzose.guild.roles, name="franzoser"))
+                try:
+                    await message.channel.send("franzosenjail set to true")
+                except Exception as e:
+                    print(e)
+            if ".f" in user_message:
+                for user in franzosen:
+                    franzose = message.guild.get_member(user)
+                    await franzose.add_roles(get(franzose.guild.roles, name="zugriff"))
+                    await franzose.remove_roles(get(franzose.guild.roles, name="franzoser"))
+                try:
+                    await message.channel.send("franzosenjail set to false")
+                except Exception as e:
+                    print(e)
+            
     client.run(TOKEN)
 
 
@@ -108,7 +126,7 @@ def react(nachricht_e, message):
     #     async def e():
     #         try:
     #             userE = discord.Embed(title = str(message.author), color = discord.Color(000000),description="test")
-    #             await message.channel.send(embed =userE)
+    #             await message.channel.send(embed =userE) 
     #         except Exception as e:
     #             print(e)
     #     return 0
@@ -117,6 +135,7 @@ def react(nachricht_e, message):
             return "<:komischesetwas:949028421781028864>"
 
     if "prefix" in nachricht:
+
         prefix = nachricht[-1]
         daten[prefix_index] = f"prefix = \"{prefix}\""
         with open("settings.py",mode="w") as datei:
